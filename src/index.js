@@ -9,7 +9,7 @@ import assign from 'lodash/assign'
 import omit from 'lodash/omit'
 import keys from 'lodash/keys'
 
-const noop = function() {}
+const noop = function () {}
 const events = [
   'currentTimeTick',
   'click',
@@ -31,7 +31,7 @@ const events = [
 const eventPropTypes = {}
 const eventDefaultProps = {}
 
-each(events, event => {
+each(events, (event) => {
   ;(eventPropTypes[event] = PropTypes.func),
     (eventDefaultProps[`${event}Handler`] = noop)
 })
@@ -53,7 +53,7 @@ export default class Timeline extends Component {
 
     this.$el = new vis.Timeline(container, undefined, this.props.options)
 
-    events.forEach(event => {
+    events.forEach((event) => {
       this.$el.on(event, this.props[`${event}Handler`])
     })
 
@@ -139,12 +139,12 @@ export default class Timeline extends Component {
 
     // NOTE this has to be in arrow function so context of `this` is based on
     // this.$el and not `each`
-    each(customTimeKeysToRemove, id => this.$el.removeCustomTime(id))
-    each(customTimeKeysToAdd, id => {
+    each(customTimeKeysToRemove, (id) => this.$el.removeCustomTime(id))
+    each(customTimeKeysToAdd, (id) => {
       const datetime = customTimes[id]
       this.$el.addCustomTime(datetime, id)
     })
-    each(customTimeKeysToUpdate, id => {
+    each(customTimeKeysToUpdate, (id) => {
       const datetime = customTimes[id]
       this.$el.setCustomTime(datetime, id)
     })
